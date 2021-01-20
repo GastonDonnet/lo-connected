@@ -1,0 +1,24 @@
+[
+  {
+    "fuente": "INDEC",
+    "municipio": { "nombre": "San Carlos Centro", "id": "820168" },
+    "departamento": { "nombre": "Las Colonias", "id": "82070" },
+    "nombre": "San Carlos Centro",
+    "id": "82070230",
+    "provincia": { "nombre": "Santa Fe", "id": "82" },
+    "funcion": null,
+    "categoria": "Componente de localidad compuesta",
+    "centroide": { "lat": -31.7284179989089, "lon": -61.0913957859145 }
+  },
+  {
+    "fuente": "INDEC",
+    "municipio": { "nombre": "San Carlos Sud", "id": "823211" },
+    "departamento": { "nombre": "Las Colonias", "id": "82070" },
+    "nombre": "San Carlos Sud",
+    "id": "82070250",
+    "provincia": { "nombre": "Santa Fe", "id": "82" },
+    "funcion": null,
+    "categoria": "Componente de localidad compuesta",
+    "centroide": { "lat": -31.7575954064363, "lon": -61.1007514980913 }
+  }
+]
