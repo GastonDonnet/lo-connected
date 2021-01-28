@@ -94,7 +94,7 @@ class Shop extends BaseModel {
         imgBanner: { type: 'string' },
         imgLogo: { type: 'string' },
 
-        invitationCode: { type: 'string, null' },
+        invitationCode: { type: ['string', 'null'] },
         invitationCodeExpires: { type: 'datetime, null' },
         defaultRoleId: { type: 'integer, null', minnum: 0 },
 

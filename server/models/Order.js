@@ -68,7 +68,7 @@ class Order extends BaseModel {
         orderStateId: { type: 'integer' },
 
         clientAddress: { type: 'string', maxLength: 500 },
-        note: { type: 'string, null', maxLength: 1000, default: null },
+        note: { type: ['string', 'null'], maxLength: 1000, default: null },
 
         paymentMethod: {
           type: 'string',
@@ -76,8 +76,10 @@ class Order extends BaseModel {
           default: 'efectivo',
         },
 
-        deliveryDate: { type: 'string, null' },
-        deliveryTime: { type: 'string, null' },
+        deliveryDate: { type: ['string', 'null'] },
+        deliveryTime: { type: ['string', 'null'] },
+
+        total: { type: 'float' },
 
         lastStateUpdate: { type: 'datetime' },
       },
