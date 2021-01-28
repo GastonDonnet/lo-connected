@@ -151,6 +151,7 @@ export default {
   methods: {
     ...mapActions('auth', ['login', 'loginWithPassword']),
     async sendLogin() {
+      console.log('sendLogin');
       await this.login();
       this.$router.push({
         name: 'Index',
@@ -164,8 +165,10 @@ export default {
     },
   },
 
-  mounted() {
-    if (this.$cookies.get('jwt')) {
+  async created() {
+    const loggedIn = localStorage.getItem('loggedIn') === '1';
+
+    if (this.$cookies.get('jwt') || localStorage.getItem('jwt')) {
       this.sendLogin();
     }
   },

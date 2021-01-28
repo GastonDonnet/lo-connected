@@ -32,11 +32,13 @@ export default {
     async loginWithPassword({ commit, dispatch }, authData) {
       try {
         const response = await Vue.prototype.$http.post('auth/signin', authData);
+        console.log(response);
+        localStorage.setItem('loggedIn', 1);
         localStorage.setItem('jwt', response.data.token);
         await dispatch('login');
-        Vue.prototype.$toast('Logueado correctamente!', { color: 'success' });
       } catch (error) {
-        if (error.response.status === 500) {
+        if (error.status === 500) {
+          console.log(error.response);
           Vue.prototype.$toast('Ocurrio un error!', { color: 'error' });
         } else {
           Vue.prototype.$toast(error.response.data.message, { color: 'error' });
@@ -44,7 +46,8 @@ export default {
       }
     },
     async login({ commit, dispatch }) {
-      const token = Vue.$cookies.get('jwt');
+      console.log('login');
+      const token = Vue.$cookies.get('jwt') ?? localStorage.getItem('jwt');
       if (token) {
         localStorage.setItem('loggedIn', 1);
         await dispatch('getUser');
@@ -57,7 +60,8 @@ export default {
     async logout({ commit }) {
       try {
         await Vue.prototype.$http.get('auth/logout');
-        localStorage.setItem('loggedIn', 0);
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('loggedIn');
         commit('LOGOUT');
         commit('SET_USER', {});
         Vue.prototype.$toast('Saliste del sistema!', { color: 'success' });
@@ -67,6 +71,7 @@ export default {
       }
     },
     async getUser({ commit, state }) {
+      console.log('getUser');
       const loggedIn = localStorage.getItem('loggedIn') * 1;
       if (!loggedIn) return;
 
@@ -74,7 +79,8 @@ export default {
         const response = await Vue.prototype.$http.get('users/me');
         commit('SET_USER', response.data.data.data);
       } catch (error) {
-        localStorage.setItem('loggedIn', 0);
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('loggedIn');
         commit('LOGOUT');
         commit('SET_USER', {});
         Vue.prototype.$toast('No estas logueado, logueate nuevamente!', { color: 'error' });

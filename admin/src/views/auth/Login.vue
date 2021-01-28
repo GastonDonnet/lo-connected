@@ -164,8 +164,8 @@ export default {
     },
   },
 
-  mounted() {
-    if (this.$cookies.get('jwt')) {
+  async created() {
+    if (this.$cookies.get('jwt') || localStorage.getItem('jwt')) {
       this.sendLogin();
     }
   },

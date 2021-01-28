@@ -132,7 +132,7 @@ export default {
       firstName: '',
       lastName: '',
       telephone: '',
-      birthDate: '',
+      birthDate: undefined,
       gender: null,
     },
 

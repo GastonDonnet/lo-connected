@@ -53,7 +53,7 @@ export default {
         await dispatch('login');
         Vue.prototype.$toast('Logueado correctamente!', { color: 'success' });
       } catch (error) {
-        if (error.response.status === 500) {
+        if (error.status === 500) {
           console.log(error.response);
           Vue.prototype.$toast('Ocurrio un error!', { color: 'error' });
         } else {
@@ -62,22 +62,23 @@ export default {
       }
     },
     async login({ commit, dispatch, state }) {
-      const token = Vue.$cookies.get('jwt');
+      console.log('login');
+      const token = Vue.$cookies.get('jwt') ?? localStorage.getItem('jwt');
       if (token) {
         localStorage.setItem('loggedIn', 1);
         // await dispatch('getUser');
         commit('LOGIN');
         Vue.prototype.$toast('Logueado correctamente!', { color: 'success' });
       } else {
-        console.log(error.response);
         Vue.prototype.$toast('Ocurrio un error!', { color: 'error' });
       }
     },
     async logout({ commit }) {
       try {
         await Vue.prototype.$http.get('auth/logout');
-        localStorage.setItem('loggedIn', 0);
-        localStorage.setItem('activeEmployee', '');
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('activeEmployee');
         commit('LOGOUT');
         commit('SET_USER', {});
         commit('SET_EMPLOYEE', {});
@@ -88,7 +89,8 @@ export default {
       }
     },
     async getUser({ commit, state }) {
-      const activeEmployee = localStorage.getItem('activeEmployee') * 1;
+      console.log('getUser');
+      const activeEmployeeId = localStorage.getItem('activeEmployee') * 1;
       const loggedIn = localStorage.getItem('loggedIn') * 1;
 
       if (!loggedIn) return;
@@ -99,16 +101,25 @@ export default {
         );
         commit('SET_USER', response.data.data.data);
 
-        if (activeEmployee) {
-          commit(
-            'SET_EMPLOYEE',
-            state.currentUser.employees.find((el) => el.shopId === activeEmployee)
+        console.log(activeEmployeeId);
+
+        if (activeEmployeeId) {
+          const activeEmployee = state.currentUser.employees.find(
+            (el) => el.shopId === activeEmployeeId
           );
+
+          console.log(activeEmployee);
+
+          if (activeEmployee) commit('SET_EMPLOYEE', activeEmployee);
+          else {
+            localStorage.removeItem('activeEmployee');
+          }
         }
       } catch (error) {
         console.log(error.response);
-        localStorage.setItem('loggedIn', 0);
-        localStorage.setItem('activeEmployee', '');
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('activeEmployee');
         commit('LOGOUT');
         commit('SET_USER', {});
         commit('SET_EMPLOYEE', {});
