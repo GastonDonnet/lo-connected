@@ -23,6 +23,20 @@ exports.deleteOrder = factory.deleteOne(Order);
 
 exports.createOrder = catchAsync(async (req, res, next) => {
   const newDoc = await Order.transaction(async (trx) => {
+    // Calculo subtotales
+    const subtotals = [];
+    req.body.cart.products.map((cartProduct) => {
+      subtotals.push(
+        cartProduct.quantity *
+          (cartProduct.product.price || cartProduct.product.product.price)
+      );
+    });
+
+    const total = subtotals.reduce((total, subtotal) => {
+      return (total += subtotal);
+    }, 0);
+
+    // Creo orden
     const newOrder = await Order.query(trx).insert({
       userId: req.body.userId,
       shopId: req.body.shopId,
@@ -38,36 +52,34 @@ exports.createOrder = catchAsync(async (req, res, next) => {
         : 'Retiro en local',
       note: `${req.body.note}`,
       token: crypto.randomBytes(16).toString('hex'), //TODO: VER TOKEN UNICO, CONBINAR CON FECHA?
+      total: total,
     });
 
+    // Creo OrderProducts
     const newOrderProducts = [];
-    for (cartProduct of req.body.cart.products) {
-      newOrderProducts.push(
-        await OrderProduct.query(trx).insert({
-          orderId: newOrder.id,
-          orderProductStateId: 1,
-          statusId: 1,
-          productVariantId: cartProduct.productVariantId,
-          quantity: cartProduct.quantity,
-          price: cartProduct.product.price || cartProduct.product.product.price,
-          subtotal:
-            cartProduct.quantity *
-            (cartProduct.product.price || cartProduct.product.product.price),
-          note: cartProduct.note,
-          token: crypto.randomBytes(16).toString('hex'),
-          name: `${cartProduct.product.product.name} ${
-            cartProduct.product.product.model
-              ? cartProduct.product.product.model
-              : ''
-          }`,
-        })
-      );
-    }
-
-    // await Promise.all(newOrderProducts); //TODO: VER SI SE PUEDE MEJORAR, AHORA ESTA NO ASYNC
-    await newOrder.$query(trx).patchAndFetch({
-      total: newOrderProducts.reduce((ant, el) => (ant += el.subtotal), 0),
-    });
+    await Promise.all(
+      req.body.cart.products.map(async (cartProduct, i) => {
+        newOrderProducts.push(
+          await OrderProduct.query(trx).insert({
+            orderId: newOrder.id,
+            orderProductStateId: 1,
+            statusId: 1,
+            productVariantId: cartProduct.productVariantId,
+            quantity: cartProduct.quantity,
+            price:
+              cartProduct.product.price || cartProduct.product.product.price,
+            subtotal: subtotals[i],
+            note: cartProduct.note,
+            token: crypto.randomBytes(16).toString('hex'),
+            name: `${cartProduct.product.product.name} ${
+              cartProduct.product.product.model
+                ? cartProduct.product.product.model
+                : ''
+            }`,
+          })
+        );
+      })
+    );
 
     return newOrder;
   });
