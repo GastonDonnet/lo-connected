@@ -1,18 +1,21 @@
 version: "3.8"
 services:
-  web-client:
-    build: ./client/
-    networks:
-      - frontend
-    volumes:
-      - ./client/dist:/app/dist
+  # web-client:
+  #   build: ./client/
+  #   networks:
+  #     - frontend
+  #   volumes:
+  #     # - ./docker/www/www.loconnected.com:/app/dist
+  #     # - ./docker/www/www.loconnected.com:/app
+  #   tty: true
 
-  web-admin:
-    build: ./admin/
-    networks:
-      - frontend
-    volumes:
-      - ./admin/dist:/app/dist
+  # web-admin:
+  #   build: ./admin/
+  #   networks:
+  #     - frontend
+  #   volumes:
+  #     # - ./docker/www/admin.loconnected.com:/app/dist
+  #   tty: true
 
   db:
     image: mariadb
@@ -31,11 +34,18 @@ services:
   adminer:
     image: adminer
     restart: always
+    networks:
+      - backend
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: db
+      ADMINER_DEFAULT_DB_NAME: adminer
+      ADMINER_DESIGN: nette
+      ADMINER_PLUGINS: tables-filter tinymce
 
   node-api:
     build: ./server/
     image: node-api
-    container_name: node-api
     restart: unless-stopped
     stdin_open: true # docker run -i
     tty: true # docker run -t
@@ -50,20 +60,18 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      - "443:443"
+      #- "443:443"
     volumes:
       - ./docker/nginx:/etc/nginx
-      - ./client/dist:/var/www/loconected.com/
-      - ./client/dist:/var/www/admin.loconected.com/
+      - ./docker/www:/var/www:ro
       # - ./docker/certbot/conf:/etc/letsencrypt
       # - ./docker/certbot/www:/var/www/certbot
     depends_on:
       - node-api
-      - web-admin
-      - web-client
+
     networks:
       - backend
-      - frontend
+      # - frontend
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
   # certbot:
@@ -76,7 +84,7 @@ services:
   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 networks:
-  frontend:
-    driver: bridge
+  # frontend:
+  #   driver: bridge
   backend:
     driver: bridge

@@ -1,9 +1,13 @@
-FROM node:latest
+FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY ./ .
+COPY . .
 RUN npm run build
+
+FROM alpine as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app/admin.loconnected.com
 
 # FROM nginx as production-stage
 # RUN mkdir /app
