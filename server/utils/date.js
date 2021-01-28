@@ -2,7 +2,7 @@ class CustomDate {
   constructor(date = undefined) {
     if (!date) {
       this.date = new Date();
-      this.addHours(-3); // Corrije Timezone
+      this.addHours(-3); // Corrige Timezone
     } else {
       this.date = new Date(date);
     }
@@ -10,6 +10,10 @@ class CustomDate {
 
   ISO() {
     return this.date.toISOString();
+  }
+
+  MYSQLParse() {
+    return this.date.toISOString().slice(0, 19).replace('T', ' ');
   }
 
   getTime() {

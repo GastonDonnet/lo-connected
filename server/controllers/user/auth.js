@@ -57,7 +57,7 @@ exports.signinWithPassword = catchAsync(async (req, res, next) => {
   }
 
   // 3) Update lastLogin
-  await user.$query().patch({ lastLogin: new CustomDate().ISO() });
+  await user.$query().patch({ lastLogin: new CustomDate().MYSQLParse() });
 
   // 4) If everything ok, send token to client
   const token = createSendToken(user, res);
@@ -178,7 +178,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     .findOne({
       passwordResetToken: hashedToken,
     })
-    .andWhere('passwordResetExpires', '>', new CustomDate().ISO())
+    .andWhere('passwordResetExpires', '>', new CustomDate().MYSQLParse())
     .withGraphFetched('address.city.province');
 
   if (!user) {

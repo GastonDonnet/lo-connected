@@ -13,7 +13,7 @@ class BaseModel extends Model {
       });
     }
 
-    const now = new CustomDate().ISO();
+    const now = new CustomDate().MYSQLParse();
     this.createdAt = now;
     this.updatedAt = now;
   }
@@ -23,7 +23,7 @@ class BaseModel extends Model {
       !queryContext.ignoredFields ||
       !arrayOnlyIncludes(Object.keys(this), queryContext.ignoredFields)
     ) {
-      this.updatedAt = new CustomDate().ISO();
+      this.updatedAt = new CustomDate().MYSQLParse();
     }
   }
 }

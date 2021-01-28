@@ -120,7 +120,7 @@ exports.resizeShopPhoto = catchAsync(async (req, res, next) => {
 
 /// RESUMENES PARA DASHBOARD
 exports.getTotal = catchAsync(async (req, res, next) => {
-  req.query.day = new CustomDate(req.query.day).ISO();
+  req.query.day = new CustomDate(req.query.day).MYSQLParse();
 
   let groupByRaw = '';
   if (req.query.freq == 'day') {

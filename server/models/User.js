@@ -96,7 +96,7 @@ class User extends BaseModel {
     await super.$beforeUpdate(opt, queryContext);
 
     if (this.password) {
-      this.passwordChangedAt = new CustomDate().addSeconds(-5).ISO();
+      this.passwordChangedAt = new CustomDate().addSeconds(-5).MYSQLParse();
       this.passwordConfirm = undefined;
       await this.$cryptPassword();
     }
@@ -123,7 +123,7 @@ class User extends BaseModel {
       .update(resetToken)
       .digest('hex');
 
-    const passwordResetExpires = new CustomDate().addMinutes(10).ISO(); // Expira en 10 minutos
+    const passwordResetExpires = new CustomDate().addMinutes(10).MYSQLParse(); // Expira en 10 minutos
 
     await this.$query().patch(passwordResetExpires, passwordResetToken);
     return resetToken;

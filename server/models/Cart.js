@@ -32,7 +32,7 @@ class Cart extends BaseModel {
         shopId: { type: 'integer' },
         validTo: {
           type: 'datetime',
-          default: new CustomDate().addHours(2).ISO(),
+          default: new CustomDate().addHours(2).MYSQLParse(),
         },
       },
     };

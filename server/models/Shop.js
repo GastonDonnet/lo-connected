@@ -117,7 +117,7 @@ class Shop extends BaseModel {
       .update(invitationCode)
       .digest('hex');
 
-    const invitationCodeExpires = new CustomDate().addMinutes(10).ISO(); // Expira en 10 minutos
+    const invitationCodeExpires = new CustomDate().addMinutes(10).MYSQLParse(); // Expira en 10 minutos
 
     await this.$query().patch({
       invitationCode: hashedInvitationCode,
