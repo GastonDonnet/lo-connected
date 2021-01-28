@@ -51,7 +51,7 @@ exports.up = function (knex) {
       t.string('token').unique().notNullable();
 
       t.string('clientAddress').notNullable();
-      t.float('total').notNullable();
+      t.float('total');
       t.string('note');
       t.boolean('delivery').defaultTo(true);
       t.enum('paymentMethod', ['efectivo', 'tarjeta']);
