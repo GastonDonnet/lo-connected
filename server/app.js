@@ -27,11 +27,12 @@ const app = express();
 if (process.env.NODE_ENV === 'production') {
   const whitelist = [process.env.CLIENT_URL, process.env.ADMIN_URL];
   app.use(
+    '/api',
     cors({
       credentials: true,
       origin: function (origin, callback) {
         console.log(origin, whitelist.indexOf(origin));
-        if (whitelist.indexOf(origin) !== -1 || origin === undefined) {
+        if (whitelist.indexOf(origin) !== -1) {
           callback(null, true);
         } else {
           callback(new Error('Not allowed by CORS'));
