@@ -6,7 +6,7 @@ module.exports = class Email {
   // new Email(user, url).sendWelcome()
   constructor(user, url) {
     this.to = user.email;
-    this.firstName = user.firstName;
+    this.displayName = user.displayName;
     this.url = url;
     this.from = `${process.env.EMAIL_USERNAME}`;
   }
@@ -25,7 +25,7 @@ module.exports = class Email {
     // Send the actual email
     // 1) Render HTML based on a pug template
     const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-      firstName: this.firstName,
+      displayName: this.displayName,
       url: this.url,
       subject: subject,
     });
