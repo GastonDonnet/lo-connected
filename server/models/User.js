@@ -88,7 +88,9 @@ class User extends BaseModel {
   }
 
   async $beforeInsert() {
-    await this.cryptPassword();
+    if (this.password) {
+      await this.cryptPassword();
+    }
   }
 
   async $beforeUpdate(opt, queryContext) {
