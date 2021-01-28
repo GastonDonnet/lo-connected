@@ -138,12 +138,12 @@ exports.getTotal = catchAsync(async (req, res, next) => {
     .andWhere(
       'updatedAt',
       '>=',
-      new CustomDate(req.query.from).ISO().slice(0, 10)
+      new CustomDate(req.query.from).MYSQLParse().slice(0, 10)
     )
     .andWhere(
       'updatedAt',
       '<=',
-      new CustomDate(req.query.to).ISO().slice(0, 10)
+      new CustomDate(req.query.to).MYSQLParse().slice(0, 10)
     )
     .groupByRaw(groupByRaw)
     .debug();
