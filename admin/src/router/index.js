@@ -4,6 +4,8 @@ import store from '../store';
 
 import Default from '../layouts/Default.vue';
 import Blank from '../layouts/Blank.vue';
+import Index from '../views/Index.vue';
+import Login from '../views/auth/Login.vue';
 
 Vue.use(VueRouter);
 
@@ -15,7 +17,7 @@ const routes = [
       {
         path: '/',
         name: 'Index',
-        component: () => import('../views/Index.vue'),
+        component: Index,
       },
       {
         path: '/dashboard',
@@ -68,7 +70,7 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
-        component: () => import('../views/auth/Login.vue'),
+        component: Login,
         beforeEnter(to, from, next) {
           if (store.getters['auth/loggedIn']) next({ name: 'Index' });
           next();

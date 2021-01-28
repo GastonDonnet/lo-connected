@@ -15,13 +15,16 @@
 <script>
 import store from '@/store';
 
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import NavDrawer from '../components/layout/NavDrawer';
+
 export default {
   name: 'Default',
   components: {
-    Navbar: () => import('../components/layout/Navbar'),
-    //BottomNav: () => import('./components/layout/BottomNav'),
-    Footer: () => import('../components/layout/Footer'),
-    NavDrawer: () => import('../components/layout/NavDrawer'),
+    Navbar,
+    Footer,
+    NavDrawer,
   },
   async beforeRouteEnter(to, from, next) {
     const { currentUser } = store.state.auth;

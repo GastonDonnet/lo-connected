@@ -4,6 +4,8 @@ import store from '../store';
 
 import Default from '../layouts/Default.vue';
 import Blank from '../layouts/Blank.vue';
+import Index from '../views/Index.vue';
+import Login from '../views/auth/Login.vue';
 
 Vue.use(VueRouter);
 
@@ -22,25 +24,26 @@ const routes = [
       {
         path: '/',
         name: 'Index',
-        component: () => import('../views/Index.vue'),
+        component: Index,
         meta: { name: 'LoConnected' },
       },
       {
         path: '/pedidos',
         name: 'Pedidos',
-        component: () => import('../views/pedidos/Pedidos.vue'),
+        component: () => import(/* webpackChunkName: "Pedidos" */ '../views/pedidos/Pedidos.vue'),
         meta: { name: 'Pedidos' },
       },
       {
         path: '/pedidos/:id',
         name: 'Pedido Detalle',
-        component: () => import('../views/pedidos/Detalle.vue'),
+        component: () =>
+          import(/* webpackChunkName: "PedidosDetalle" */ '../views/pedidos/Detalle.vue'),
         meta: { name: 'Detalle de Pedido' },
       },
       {
         path: '/user/perfil',
         name: 'Perfil',
-        component: () => import('../views/user/Profile.vue'),
+        component: () => import(/* webpackChunkName: "Perfil" */ '../views/user/Profile.vue'),
         meta: { name: 'Mi Perfil' },
       },
 
@@ -48,19 +51,20 @@ const routes = [
         {
           path: '/',
           name: 'Shop',
-          component: () => import('../views/shop/Shop.vue'),
+          component: () => import(/* webpackChunkName: "Shop" */ '../views/shop/Shop.vue'),
           meta: { name: 'Shop' },
         },
         {
           path: '/category/:categoryId',
           name: 'Shop Products',
-          component: () => import('../views/shop/ShopProductList.vue'),
+          component: () =>
+            import(/* webpackChunkName: "ShopCategories" */ '../views/shop/ShopProductList.vue'),
           meta: { name: 'Shop - Productos' },
         },
         {
           path: '/cart',
           name: 'Cart',
-          component: () => import('../views/shop/Cart.vue'),
+          component: () => import(/* webpackChunkName: "Cart" */ '../views/shop/Cart.vue'),
           meta: { name: 'Carro de compras' },
         },
       ]),
@@ -68,13 +72,14 @@ const routes = [
       {
         path: '/shops',
         name: 'Shops',
-        component: () => import('../views/shops/AllShops.vue'),
+        component: () => import(/* webpackChunkName: "Shops" */ '../views/shops/AllShops.vue'),
         meta: { name: 'Shops' },
       },
       {
         path: '/category/:id',
         name: 'Shops Category',
-        component: () => import('../views/shops/Category.vue'),
+        component: () =>
+          import(/* webpackChunkName: "ShopsCategory" */ '../views/shops/Category.vue'),
         meta: { name: 'Categoria' },
       },
 
@@ -97,7 +102,7 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
-        component: () => import('../views/auth/Login.vue'),
+        component: Login,
         beforeEnter(to, from, next) {
           if (store.getters['auth/loggedIn']) next({ name: 'Index' });
           next();
@@ -106,7 +111,7 @@ const routes = [
       {
         path: 'register',
         name: 'Register',
-        component: () => import('../views/auth/Register.vue'),
+        component: () => import(/* webpackChunkName: "Register" */ '../views/auth/Register.vue'),
         beforeEnter(to, from, next) {
           if (store.getters['auth/loggedIn']) next({ name: 'Index' });
           next();
@@ -115,7 +120,7 @@ const routes = [
       {
         path: 'logout',
         name: 'Logout',
-        component: () => import('../views/auth/Logout.vue'),
+        component: () => import(/* webpackChunkName: "Logout" */ '../views/auth/Logout.vue'),
       },
     ],
   },
