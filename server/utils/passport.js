@@ -25,7 +25,7 @@ const createOrRetrieveUser = async (userInfo) => {
 
     // Fecha de logueo
     const userPatch = {
-      lastLogin: new CustomDate().ISO(),
+      lastLogin: new CustomDate().MYSQLParse(),
     };
 
     // Si existe una cuenta con el mismo email pero no esta guardado el inicio por otra red, la vincula
