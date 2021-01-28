@@ -20,7 +20,7 @@
     >
       <template v-slot:item.client="{ item }">
         <v-chip color="grey lighten-5" @click="showUserInfo(item)">
-          {{ item.user.firstName }} {{ item.user.lastName }}
+          {{ item.user.displayName }}
           <v-icon right link>mdi-account-details</v-icon>
         </v-chip>
       </template>

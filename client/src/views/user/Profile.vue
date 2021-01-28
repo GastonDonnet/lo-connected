@@ -122,13 +122,13 @@ export default {
       },
       userRules: {
         displayName: [
-          (v) => !!v || `${this.userLabel.firstName} es requerido!`,
+          (v) => !!v || `${this.userLabel.displayName} es requerido!`,
           (v) =>
             (v && v.length >= 1) ||
-            'firstName debe tener al menos 1 caracteres!',
+            'displayName debe tener al menos 1 caracteres!',
           (v) =>
             (v && v.length < 255) ||
-            'firstName debe tener menos de 255 caracteres!',
+            'displayName debe tener menos de 255 caracteres!',
         ],
         telephone: [
           (v) => !!v || `${this.userLabel.telephone} es requerido!`,

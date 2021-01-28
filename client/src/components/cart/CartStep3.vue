@@ -110,12 +110,12 @@
         </v-row>
         <v-row class="font-weight-light body-2">
           <v-col v-if="newOrder.delivery">
-            <p>{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+            <p>{{ currentUser.displayName }}</p>
             <p>{{ newOrder.address.street }}</p>
             <p>{{ newOrder.address.city.name }}</p>
           </v-col>
           <v-col v-else>
-            <p>{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+            <p>{{ currentUser.displayName }}</p>
           </v-col>
         </v-row>
       </v-col>

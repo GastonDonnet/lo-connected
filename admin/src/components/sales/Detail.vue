@@ -88,7 +88,7 @@
         </v-row>
         <v-row class="font-weight-light body-2">
           <v-col>
-            <p>{{ `${order.user.firstName} ${order.user.lastName}` }}</p>
+            <p>{{ `${order.user.displayName}` }}</p>
             <p>{{ order.clientAddress }}</p>
           </v-col>
         </v-row>
@@ -104,7 +104,7 @@
         </v-row>
         <v-row class="font-weight-light body-2">
           <v-col>
-            <p>{{ `${order.user.firstName} ${order.user.lastName}` }}</p>
+            <p>{{ `${order.user.displayName}` }}</p>
           </v-col>
         </v-row>
       </v-col>
@@ -145,7 +145,7 @@
               {{ transaction.validFrom.split('T').join(' ').substring(0, 19) }}
             </p>
             <p class="font-weight-light">
-              {{ `${transaction.user.firstName} ${transaction.user.lastName}` }}
+              {{ `${transaction.user.displayName}` }}
             </p>
           </v-timeline-item>
           <v-timeline-item>

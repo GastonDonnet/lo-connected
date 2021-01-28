@@ -94,7 +94,7 @@
               {{
                 `${
                   order.userId == currentUser.id
-                    ? currentUser.firstName + ' ' + currentUser.lastName
+                    ? currentUser.displayName
                     : 'ERROR'
                 }`
               }}
@@ -118,7 +118,7 @@
               {{
                 `${
                   order.userId == currentUser.id
-                    ? currentUser.firstName + ' ' + currentUser.lastName
+                    ? currentUser.displayName
                     : 'ERROR'
                 }`
               }}
