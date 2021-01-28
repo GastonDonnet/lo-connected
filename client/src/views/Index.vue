@@ -34,18 +34,16 @@
 </template>
 
 <script>
-import CategoriesShop from '@/components/shops/Categories';
-import SearchShop from '@/components/Search';
-import ShopList from '@/components/shops/List';
+// import CategoriesShop from '@/components/shops/Categories';
+// import SearchShop from '@/components/Search';
+// import ShopList from '@/components/shops/List';
 
 export default {
   name: '',
   components: {
-    CategoriesShop,
-    SearchShop,
-    ShopList,
-    // CarrouselShop: () => import('@/components/shops/Carrousel'),
-    // SummaryShop: () => import('@/components/shops/Summary'),
+    CategoriesShop: () => import('@/components/shops/Categories'),
+    SearchShop: () => import('@/components/Search'),
+    ShopList: () => import('@/components/shops/List'),
   },
   data() {
     return {
