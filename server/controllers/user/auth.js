@@ -19,7 +19,7 @@ const createSendToken = (user, res) => {
     expires: new CustomDate().addDays(process.env.JWT_COOKIE_EXPIRES_IN).date,
     httpOnly: false,
   };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (process.env.SECURE_COOKIE === 'true') cookieOptions.secure = true;
 
   if (res.res) {
     res.res.cookie('jwt', token, cookieOptions);
@@ -271,6 +271,8 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2) Verify token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
+  console.log(decoded);
 
   // 3) Check if user still exist
   const freshUser = await User.query().findById(decoded.id);
