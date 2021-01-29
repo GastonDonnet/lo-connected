@@ -16,18 +16,30 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const routes = require('./routes');
+const { all } = require('./routes');
 
 const app = express();
+
+if (process.NODE_ENV === 'production') app.enable('trust proxy');
 
 /**
  *  Common Middlewares
  */
 
+app.use((req, res, next) => {
+  console.log(
+    req.url,
+    /^(\/api).*(?<!(facebook|google))(?<!callback)$/.test(req.url)
+  );
+  next();
+});
+
 // Implement CORS
 if (process.env.NODE_ENV === 'production') {
   const whitelist = [process.env.CLIENT_URL, process.env.ADMIN_URL];
+  // Revisa las rutas api/ que no terminen en callback (las de facebook y google)
   app.use(
-    '/api',
+    /^(\/api).*(?<!(facebook|google))(?<!callback)$/,
     cors({
       credentials: true,
       origin: function (origin, callback) {
