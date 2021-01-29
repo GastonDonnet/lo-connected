@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(loconnected.com www.loconnected.com admin.loconnected.com api.loconnected.com)
+domains=( loconnected.tk www.loconnected.tk admin.loconnected.tk api.loconnected.tk )
 rsa_key_size=4096
 data_path="./docker/certbot"
 email="gassti7@gmail.com" # Adding a valid address is strongly recommended
@@ -37,7 +37,6 @@ docker-compose run --rm --entrypoint "\
     -subj '/CN=localhost'" certbot
 echo
 
-wait 10
 
 echo "### Starting nginx ..."
 docker-compose up --force-recreate -d nginx
@@ -79,5 +78,3 @@ echo
 
 echo "### Reloading nginx ..."
 docker-compose exec nginx nginx -s reload
-
-trap 'sleep infinity' EXIT

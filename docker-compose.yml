@@ -36,6 +36,8 @@ services:
     restart: always
     networks:
       - backend
+    depends_on:
+      - db
     environment:
       ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: db
@@ -54,34 +56,33 @@ services:
     depends_on:
       - db
 
-  nginx-server:
+  nginx:
     image: nginx:mainline-alpine
-    container_name: nginx-server
     restart: unless-stopped
     ports:
       - "80:80"
-      #- "443:443"
+      - "443:443"
     volumes:
       - ./docker/nginx:/etc/nginx
       - ./docker/www:/var/www:ro
-      # - ./docker/certbot/conf:/etc/letsencrypt
-      # - ./docker/certbot/www:/var/www/certbot
+      - ./docker/certbot/conf:/etc/letsencrypt
+      #- ./docker/certbot/www:/var/www/certbot
     depends_on:
       - node-api
+      - adminer
 
     networks:
       - backend
       # - frontend
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
-  # certbot:
-  #   image: certbot/certbot
-  #   depends_on:
-  #     - nginx-server
-  #   volumes:
-  #     - ./docker/certbot/conf:/etc/letsencrypt
-  #     - ./docker/certbot/www:/var/www/certbot
-  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./docker/certbot/conf:/etc/letsencrypt
+      - ./docker/www/certbot:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 networks:
   # frontend:
