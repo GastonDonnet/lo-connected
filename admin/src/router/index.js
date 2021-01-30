@@ -111,6 +111,12 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
+  // Si posee el jwt y no esta logueado
+  const token = Vue.$cookies.get('jwt') ?? localStorage.getItem('jwt');
+  if (token && !store.getters['auth/loggedIn']) {
+    await store.dispatch('auth/login');
+  }
+
   if (unprotectedRoutes.includes(to.name) | store.getters['auth/loggedIn']) {
     next();
   } else {
