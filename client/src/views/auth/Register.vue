@@ -114,7 +114,7 @@
 <script>
 import isEmail from 'validator/lib/isEmail';
 import isMobilePhone from 'validator/lib/isMobilePhone';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Registro',
@@ -148,6 +148,7 @@ export default {
     },
   }),
   computed: {
+    ...mapState('auth', ['loginRedirect']),
     userRules() {
       return {
         password: [
@@ -219,7 +220,7 @@ export default {
     async sendRegister() {
       this.user.displayName = `${this.user.firstName} ${this.user.lastName}`;
       await this.register(this.user);
-      this.$router.push({ name: 'Index' });
+      this.$router.push(this.loginRedirect);
     },
   },
 };

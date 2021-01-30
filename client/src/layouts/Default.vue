@@ -19,15 +19,6 @@ export default {
     Navbar,
     Footer,
   },
-
-  async beforeRouteEnter(to, from, next) {
-    //console.log(store);
-    const { currentUser } = store.state.auth;
-    if (!currentUser.id) {
-      await store.dispatch('auth/getUser').then(next);
-    }
-    next();
-  },
 };
 </script>
 

@@ -6,11 +6,12 @@ export default {
   state: {
     loggedIn: localStorage.getItem('loggedIn') || '0',
     currentUser: {},
+    loginRedirect: { name: 'Index' },
   },
   getters: {
     isAdmin(state) {},
     loggedIn(state) {
-      return !!(state.loggedIn * 1);
+      return state.loggedIn == true;
     },
     currentUserId() {
       return this.currentUser.id;
@@ -23,7 +24,6 @@ export default {
         localStorage.setItem('jwt', response.data.token);
         Vue.prototype.$toast('Registrado correctamente!', { color: 'success' });
         await dispatch('login');
-        Vue.prototype.$router.push({ name: 'Index' });
       } catch (error) {
         console.log(error.response);
         Vue.prototype.$toast('Ocurrio un error!', { color: 'error' });
@@ -45,7 +45,7 @@ export default {
         }
       }
     },
-    async login({ commit, dispatch }) {
+    async login({ commit, dispatch, state }) {
       console.log('login');
       const token = Vue.$cookies.get('jwt') ?? localStorage.getItem('jwt');
       if (token) {
@@ -87,6 +87,9 @@ export default {
         router.push({ name: 'Login' });
       }
     },
+    setLoginRedirect({ commit }, route) {
+      commit('SET_LOGIN_REDIRECT', route);
+    },
   },
   mutations: {
     LOGIN(state) {
@@ -98,6 +101,9 @@ export default {
     SET_USER(state, userData) {
       //console.log('MUTATION');
       state.currentUser = userData;
+    },
+    SET_LOGIN_REDIRECT(state, route) {
+      state.loginRedirect = route;
     },
   },
 };

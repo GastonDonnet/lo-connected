@@ -17,7 +17,7 @@
 
 <script>
 import Product from '@/components/shop/Product.vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     ...mapState('shop', ['currentShop']),
+    ...mapGetters('auth', ['loggedIn']),
   },
   methods: {
     ...mapActions('shop', ['getShop']),
@@ -49,7 +50,9 @@ export default {
   },
   async created() {
     await this.getShop(this.$route.params.shopId);
-    await this.getOrCreateCart();
+    if (this.loggedIn) {
+      await this.getOrCreateCart();
+    }
     if (this.$route.params.propProducts)
       this.products = this.$route.params.propProducts.entries;
     else this.getProducts();

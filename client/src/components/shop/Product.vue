@@ -238,7 +238,18 @@ export default {
   },
   methods: {
     ...mapActions('cart', ['addOrUpdateProductToCart']),
+    ...mapActions('auth', ['setLoginRedirect']),
+    loginCheck() {
+      if (!this.loggedIn) {
+        this.setLoginRedirect(this.$route);
+        this.$router.push({ name: 'Login' });
+      }
+
+      return !this.loggedIn;
+    },
     async modifyQuantity(num) {
+      if (this.loginCheck()) return;
+
       if (!this.productDetail.variants) {
         this.loading = true;
         const res = await this.$http.get(`product/${this.product.id}`);
@@ -267,6 +278,7 @@ export default {
       }
     },
     async editProductWithAtributes() {
+      if (this.loginCheck()) return;
       this.editing = true;
 
       if (!this.product.variants) {
@@ -328,6 +340,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters('auth', ['loggedIn']),
     swiperOption() {
       // const slidesPerView = parseInt(this.$vuetify.breakpoint.width/120)
       let slidesPerView = 3;

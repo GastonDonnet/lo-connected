@@ -9,7 +9,7 @@
 
     <v-spacer></v-spacer>
 
-    <div class="text-center">
+    <div class="text-center" v-if="loggedIn">
       <!--Cart -->
       <v-badge
         overlap
@@ -67,6 +67,12 @@
         </v-list>
       </v-menu>
     </div>
+    <div v-else class="text-center">
+      <v-btn text @click="$router.push({ name: 'Login' })">Loguearse</v-btn>
+      <v-btn text @click="$router.push({ name: 'Register' })"
+        >Registrarse</v-btn
+      >
+    </div>
   </v-app-bar>
 </template>
 
@@ -85,12 +91,13 @@ export default {
     ...mapState('orders', ['orders']),
     ...mapState('auth', ['currentUser']),
     ...mapGetters('orders', ['inProgressOrders']),
+    ...mapGetters('auth', ['loggedIn']),
   },
   methods: {
     ...mapActions('orders', ['getOrders']),
   },
-  async mounted() {
-    if (!this.orders.length) await this.getOrders();
+  async created() {
+    if (!this.orders.length & this.loggedIn) await this.getOrders();
   },
 };
 </script>

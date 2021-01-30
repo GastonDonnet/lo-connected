@@ -15,7 +15,7 @@ const orderRouter = require('../order/order');
 
 const router = express.Router();
 
-router.use(authController.protect);
+// Subrutas
 
 router.use('/:shopId/review', shopController.setIds, reviewRouter); // Permite api/v1/shop/1/review
 router.use('/:shopId/role', shopController.setIds, roleRouter);
@@ -36,20 +36,31 @@ router.route('/search').get(shopController.searchShop);
 // Auth
 router
   .route('/:shopId/invitationCode')
-  .get(shopController.setIds, authShopController.generateNewInvitationCode);
+  .get(
+    shopController.setIds,
+    authController.protect,
+    authShopController.generateNewInvitationCode
+  );
 
-router.route('/newEmployee').post(authShopController.newEmployee);
+router
+  .route('/newEmployee')
+  .post(authController.protect, authShopController.newEmployee);
 
 //Shops
 router
   .route('/')
   .get(shopController.getAllShops)
-  .post(authShopController.newShop);
+  .post(
+    authController.protect,
+    authShopController.protect,
+    authShopController.newShop
+  );
 
 router
   .route('/:id')
   .get(shopController.getShop)
   .patch(
+    authController.protect,
     authShopController.protect,
     authShopController.needPermission('updateShop'),
     shopController.uploadShopPhoto,
@@ -61,6 +72,7 @@ router
 router
   .route('/:id/getTotal/')
   .get(
+    authController.protect,
     authShopController.protect,
     authShopController.needPermission('getShopDashboard'),
     shopController.getTotal

@@ -124,6 +124,7 @@ const routes = [
       },
     ],
   },
+  { path: '*', component: Index },
 ];
 
 const router = new VueRouter({
@@ -132,11 +133,29 @@ const router = new VueRouter({
   routes,
 });
 
-const unprotectedRoutes = ['Login', 'Register'];
-router.beforeEach((to, from, next) => {
-  if (unprotectedRoutes.includes(to.name) || store.getters['auth/loggedIn']) {
+const unprotectedRoutes = [
+  'Login',
+  'Register',
+  'Index',
+  'Shop',
+  'Shop Products',
+  'Shops',
+  'Shops Category',
+];
+
+router.beforeEach(async (to, from, next) => {
+  // Si esta logueado, que pida el usuario
+  if (store.getters['auth/loggedIn']) {
+    const { currentUser } = store.state.auth;
+    if (!currentUser.id) {
+      await store.dispatch('auth/getUser');
+    }
+  }
+
+  if (unprotectedRoutes.includes(to.name) | store.getters['auth/loggedIn']) {
     next();
   } else {
+    store.dispatch('auth/setLoginRedirect', to);
     next({ name: 'Login' });
   }
 });

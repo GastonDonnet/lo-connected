@@ -121,6 +121,7 @@ export default {
   },
   computed: {
     ...mapState('shop', ['currentShop']),
+    ...mapGetters('auth', ['loggedIn']),
 
     staticUrl() {
       return this.$staticUrl;
@@ -136,9 +137,11 @@ export default {
       });
     },
   },
-  async beforeMount() {
+  async created() {
     await this.getShop(this.$route.params.shopId);
-    await this.getOrCreateCart();
+    if (this.loggedIn) {
+      await this.getOrCreateCart();
+    }
   },
 };
 </script>

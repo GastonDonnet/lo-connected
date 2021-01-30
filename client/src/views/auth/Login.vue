@@ -90,7 +90,7 @@
 
 <script>
 import isEmail from 'validator/lib/isEmail';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Login',
@@ -106,6 +106,7 @@ export default {
     },
   }),
   computed: {
+    ...mapState('auth', ['loginRedirect']),
     userRules() {
       return {
         password: [
@@ -153,15 +154,11 @@ export default {
     async sendLogin() {
       console.log('sendLogin');
       await this.login();
-      this.$router.push({
-        name: 'Index',
-      });
+      this.$router.push(this.loginRedirect);
     },
     async sendLoginWithPassword() {
       await this.loginWithPassword(this.user);
-      this.$router.push({
-        name: 'Index',
-      });
+      this.$router.push(this.loginRedirect);
     },
   },
 

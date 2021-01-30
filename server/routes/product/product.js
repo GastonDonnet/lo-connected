@@ -11,12 +11,9 @@ const variantRouter = require('./productVariant');
 
 const router = express.Router({ mergeParams: true });
 
-router.use(authController.protect);
-
 //Nested
 //router.use('/review', reviewRouter); // Permite api/v1/product/review
 router.use('/brand', brandRouter);
-
 router.use('/:productId/review', productController.setIds, reviewRouter); // Permite api/v1/product/1/review
 router.use('/:productId/brand', productController.setIds, brandRouter);
 router.use('/:productId/image', productController.setIds, imageRouter);
@@ -27,13 +24,16 @@ router
   .route('/')
   .get(productController.getAllProducts)
   .post(
+    authController.protect,
     productImageController.uploadProductPhotos,
     productImageController.resizeProductPhotos,
     productController.createProduct
   );
+
 router
   .route('/:id')
   .get(productController.getProduct)
+  .all(authController.protect)
   .put(
     productImageController.uploadProductPhotos,
     productImageController.resizeProductPhotos,
