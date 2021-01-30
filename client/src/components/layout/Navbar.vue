@@ -97,7 +97,7 @@ export default {
     ...mapActions('orders', ['getOrders']),
   },
   async created() {
-    if (!this.orders.length & this.loggedIn) await this.getOrders();
+    if (!this.orders.length && this.loggedIn) await this.getOrders();
   },
 };
 </script>
