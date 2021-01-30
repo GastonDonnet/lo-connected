@@ -18,7 +18,11 @@
         flat
       >
         <template v-slot:activator="{ on }">
-          <v-btn icon tile v-on="on">
+          <v-btn v-if="$vuetify.breakpoint.xs" icon tile v-on="on">
+            <v-icon>mdi-account</v-icon>
+          </v-btn>
+          <v-btn v-else text tile v-on="on" style="color: rgba(0, 0, 0, 0.54)">
+            <span class="hidden-xs-only">{{ currentUser.displayName }}</span>
             <v-icon>mdi-account</v-icon>
           </v-btn>
         </template>
