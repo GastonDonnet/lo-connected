@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent expand-on-hover app>
+  <v-navigation-drawer permanent expand-on-hover app v-if="currentShop">
     <v-list>
       <v-list-item link @click="$router.push({ name: 'Index' })">
         <v-list-item-content>
