@@ -59,7 +59,7 @@
 
     <Search
       class="my-2"
-      :route="`shop/${this.currentShop.id}/product?active=1&graph=[images]?name[like]=`"
+      :route="`shop/${this.currentShop.id}/product?active=1&graph=[images]&name[like]=`"
       @success="searchProducts"
       placeholder="Busca productos..."
       label="Producto"
