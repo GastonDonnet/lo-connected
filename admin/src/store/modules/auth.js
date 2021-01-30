@@ -40,7 +40,6 @@ export default {
         localStorage.setItem('jwt', response.data.token);
         Vue.prototype.$toast('Registrado correctamente!', { color: 'success' });
         await dispatch('login');
-        Vue.prototype.$router.push({ name: 'Index' });
       } catch (error) {
         console.log(error.response);
         Vue.prototype.$toast('Ocurrio un error!', { color: 'error' });

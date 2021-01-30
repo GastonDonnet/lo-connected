@@ -26,14 +26,6 @@ export default {
     Footer,
     NavDrawer,
   },
-  async beforeRouteEnter(to, from, next) {
-    const { currentUser } = store.state.auth;
-    console.log(!currentUser.id);
-    if (!currentUser.id) {
-      await store.dispatch('auth/getUser').then(next);
-    }
-    next();
-  },
 };
 </script>
 

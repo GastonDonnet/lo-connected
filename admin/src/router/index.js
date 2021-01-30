@@ -102,8 +102,16 @@ const router = new VueRouter({
 
 // Proteccion Login
 const unprotectedRoutes = ['Login', 'Register'];
-router.beforeEach((to, from, next) => {
-  if (unprotectedRoutes.includes(to.name) || store.getters['auth/loggedIn']) {
+router.beforeEach(async (to, from, next) => {
+  // Si esta logueado, que pida el usuario
+  if (store.getters['auth/loggedIn']) {
+    const { currentUser } = store.state.auth;
+    if (!currentUser.id) {
+      await store.dispatch('auth/getUser');
+    }
+  }
+
+  if (unprotectedRoutes.includes(to.name) | store.getters['auth/loggedIn']) {
     next();
   } else {
     next({ name: 'Login' });
@@ -112,9 +120,6 @@ router.beforeEach((to, from, next) => {
 
 //Proteccion Permisos
 const hasPermission = async (permission) => {
-  //TODO: FUE HECHO PORQUE AVESES NO ACTUALIZA EL GETTER
-  await store.dispatch('auth/getUser');
-
   return (
     (store.getters['auth/permissions'].includes(permission) ||
       store.getters['auth/permissions'].includes('totalAccess')) &&
