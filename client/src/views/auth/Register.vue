@@ -3,11 +3,16 @@
     <v-row align="center" justify="center">
       <v-col sm="8" md="6">
         <v-card elevation="24" class="rounded-xl" outlined>
-          <v-toolbar color="primary" dark flat>
+          <v-toolbar
+            color="primary"
+            dark
+            flat
+            @click="$router.push({ name: 'Index' })"
+          >
             <v-toolbar-title
               color="primary"
               class="justify-center font-weight-bold"
-              style="font-size: 30px"
+              style="font-size: 30px; cursor: pointer"
               >LoConntected
             </v-toolbar-title>
           </v-toolbar>

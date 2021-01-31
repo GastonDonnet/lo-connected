@@ -7,7 +7,7 @@
             <v-toolbar-title
               color="primary"
               class="justify-center font-weight-bold"
-              style="font-size: 30px"
+              style="font-size: 30px; cursor: pointer"
               >LoConntected
             </v-toolbar-title>
           </v-toolbar>

@@ -3,7 +3,12 @@
     <v-row justify="center">
       <v-col sm="8" md="6">
         <v-card elevation="24" class="rounded-xl" outlined>
-          <v-toolbar color="primary" dark flat>
+          <v-toolbar
+            color="primary"
+            dark
+            flat
+            @click="$router.push({ name: 'Index' })"
+          >
             <v-toolbar-title
               color="primary"
               class="justify-center font-weight-bold"
@@ -83,6 +88,14 @@
           @click="$router.push({ name: 'Register' })"
           >No tienes cuenta?</v-btn
         >
+        <v-btn
+          text
+          class="text-center mt-5"
+          block
+          color="primary"
+          @click="$router.push({ name: 'Index' })"
+          >Volver
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>

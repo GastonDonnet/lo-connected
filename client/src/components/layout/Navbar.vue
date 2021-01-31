@@ -68,10 +68,16 @@
       </v-menu>
     </div>
     <div v-else class="text-center">
-      <v-btn text @click="$router.push({ name: 'Login' })">Loguearse</v-btn>
-      <v-btn text @click="$router.push({ name: 'Register' })"
-        >Registrarse</v-btn
+      <v-btn
+        text
+        tile
+        v-on="on"
+        style="color: rgba(0, 0, 0, 0.54)"
+        @click="$router.push({ name: 'Login' })"
       >
+        Login
+        <v-icon>mdi-account</v-icon>
+      </v-btn>
     </div>
   </v-app-bar>
 </template>
@@ -97,7 +103,7 @@ export default {
     ...mapActions('orders', ['getOrders']),
   },
   async created() {
-    if (!this.orders.length && this.loggedIn) await this.getOrders();
+    if (!this.orders.length & this.loggedIn) await this.getOrders();
   },
 };
 </script>

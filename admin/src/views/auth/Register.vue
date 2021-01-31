@@ -7,8 +7,8 @@
             <v-toolbar-title
               color="primary"
               class="justify-center font-weight-bold"
-              style="font-size: 30px"
-              >LoConntected
+              style="font-size: 30px; cursor: pointer"
+              >LoConntected - Administrador
             </v-toolbar-title>
           </v-toolbar>
           <v-card-subtitle>
