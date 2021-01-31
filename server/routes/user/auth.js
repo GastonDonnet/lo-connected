@@ -10,7 +10,16 @@ const router = express.Router();
 
 // Sete cookie para redireccion
 const setRedirect = (req, res, next) => {
-  res.cookie('redirectTo', req.headers.referer);
+  const cookieOptions = {
+    expires: new Date(Date.now() + 1 * 1000),
+    httpOnly: true,
+  };
+
+  if (process.env.NODE_ENV === 'production')
+    cookieOptions.domain = `.${process.env.DOMAIN_URL}`;
+
+  res.cookie('redirectTo', req.headers.referer, cookieOptions);
+
   next();
 };
 
@@ -21,7 +30,6 @@ router.get(
   passport.authenticate('google', {
     scope: ['profile', 'email'],
     session: false,
-    passReqToCallback: true,
   })
 );
 
