@@ -8,7 +8,7 @@
               color="primary"
               class="justify-center font-weight-bold"
               style="font-size: 30px; cursor: pointer"
-              >LoConntected - Administrador
+              >LoConnected - Administrador
             </v-toolbar-title>
           </v-toolbar>
           <v-card-subtitle>
