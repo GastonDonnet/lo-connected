@@ -10,11 +10,23 @@ Para realizar el backend, partí de una estructura que aprendí mientras realiza
 
 Este repositorio publico fue creado a partir del privado con +80 commits desde el cual copie todos los archivos. Esto fue porque en la historia del privado había muchos commits que podían tener información sensible de claves.
 
+
+
 ## Cuenta con 3 proyectos
 
 - **/client**: es el frontend que utilizan los clientes. Programada en Vue.
 - **/admin**: es el frontend que utilizan los dueños/empleados de las tiendas. Programada en Vue.
 - **/server**: es una API Rest. Programada en Node.
+
+## DEMO ONLINE
+
+Web principal : <https://www.loconnected.tk>
+Administrador: <https://admin.loconnected.tk>
+
+Cuenta de prueba:
+
+- email: administrador@administrador.com
+- password: administrador
 
 ## Instalación
 
@@ -32,3 +44,4 @@ Este repositorio publico fue creado a partir del privado con +80 commits desde e
   - Revisar y mejorar iteraciones del frontend, ej: cuando se crea una tienda no se cierra la ventana y no se agrega la tienda hasta que actualice pagina.
 
 - **client**
+  - Implementar cambio de contraseña/reseteo/olvidar contraseña
