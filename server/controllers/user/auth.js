@@ -18,7 +18,6 @@ const createSendToken = (user, res) => {
   const cookieOptions = {
     expires: new CustomDate().addDays(process.env.JWT_COOKIE_EXPIRES_IN).date,
     httpOnly: false,
-    domain: `.${process.env.DOMAIN_URL}`,
   };
   if (process.env.SECURE_COOKIE === 'true') cookieOptions.secure = true;
 
@@ -80,7 +79,6 @@ exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
-    domain: `.${process.env.DOMAIN_URL}`,
   });
   res.status(200).json({ status: 'success' });
 };

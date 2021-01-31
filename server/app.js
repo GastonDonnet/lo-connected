@@ -99,7 +99,12 @@ app.use('/api', limiter);
 
 // Parsers
 app.use(express.json({ limit: '50kb' })); // Body parser, reading data from body into rq.body
-app.use(cookieParser()); // Cookie parser
+
+const cookieOptions = {
+  domain: `.${process.env.DOMAIN_URL}`,
+};
+if (process.env.NODE_ENV === 'development') delete cookieOptions.domain;
+app.use(cookieParser('', cookieOptions)); // Cookie parser
 
 // Data sanitization gainst XSS
 app.use(xss());

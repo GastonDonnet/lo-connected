@@ -10,9 +10,7 @@ const router = express.Router();
 
 // Sete cookie para redireccion
 const setRedirect = (req, res, next) => {
-  res.cookie('redirectTo', req.headers.referer, {
-    domain: `.${process.env.DOMAIN_URL}`,
-  });
+  res.cookie('redirectTo', req.headers.referer);
   next();
 };
 

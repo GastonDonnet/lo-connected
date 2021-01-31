@@ -9,6 +9,8 @@ process.on('uncaughtException', (error) => {
 });
 
 dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
 const knexfile = require('./knexfile');
 
 const app = require('./app');
