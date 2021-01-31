@@ -29,5 +29,6 @@ Este repositorio publico fue creado a partir del privado con +80 commits desde e
 
 - **admin**
   - Implementar la creación, visualización y actualización de productos con atributos.
+  - Revisar y mejorar iteraciones del frontend, ej: cuando se crea una tienda no se cierra la ventana y no se agrega la tienda hasta que actualice pagina.
 
 - **client**

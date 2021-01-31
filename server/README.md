@@ -11,7 +11,15 @@ Para instalar y configurar la API realizar los siguientes pasos:
   - Para utilizar otro DBMS como PostgreSQL hay que configurar las migrations y seeds, ya que por ej. cuando probé utilizar PostgreSQL no permitía crear datos con la Id pre fijada, por lo que no podía realizar referencias.
 
 - Configurar variables de entorno. Los valores están puestos como ejemplo y las claves no son reales.
-  - NODE_ENV = development
+
+## Variables de entorno
+
+Por defecto usa 3 archivos en la carpeta raíz (/server)
+
+- `.env`: lo carga siempre
+- `.env.development` o `.env.production`: lo carga dependiendo del valor de la variable NODE_ENV (development, production)
+
+- Variables necesarias:
   - PORT = 3000
 
   - TZ = 'Argentina/BuenosAires'
@@ -20,11 +28,6 @@ Para instalar y configurar la API realizar los siguientes pasos:
   - DB_USER ='admin'
   - DB_PASSWORD='admin'
   - DB_DATABASE='test'
-
-  - DEV_DB_URL='127.0.0.1'
-  - DEV_DB_USER='admin'
-  - DEV_DB_PASSWORD='admin'
-  - DEV_DB_DATABASE='test'
 
   - JWT_SECRET=Theverysecretsupercode
   - JWT_EXPIRES_IN=1d
@@ -36,13 +39,17 @@ Para instalar y configurar la API realizar los siguientes pasos:
   - FACEBOOK_CLIENT_ID=406398654056573
   - FACEBOOK_CLIENT_SECRET=fd2247a77494402dd0e3dc8b5292d90b
 
-  - CLIENT_URL = 'http://localhost:8080'
-  - ADMIN_URL = 'http://localhost:8081'
+  - DOMAIN_URL = 'loconnected.tk' `(production only)`
+  - API_URL =  'https://api.loconnected.tk' `(production only)`
+  - CLIENT_URL = 'https://www.loconnected.tk'
+  - ADMIN_URL = 'https://admin.loconnected.tk'
 
   - FRONT_RESET_URL = ''
 
   - EMAIL_USERNAME='user@gmail.com'
   - EMAIL_PASSWORD='password'
+
+  - SECURE_COOKIE=false
 
 - Correr las migraciones a la base de datos con `npm run knex:migrate` y luego poblarla con `npm run knex:seed`.
 - Una vez finalizado podrá iniciarse el servidor con `npm run dev`.
