@@ -60,6 +60,7 @@ export default {
     async logout({ commit }) {
       try {
         await Vue.prototype.$http.get('auth/logout');
+        Vue.$cookies.remove('jwt', null, window.location.hostname.replace('www.', ''));
         localStorage.removeItem('jwt');
         localStorage.removeItem('loggedIn');
         commit('LOGOUT');
@@ -79,6 +80,11 @@ export default {
         const response = await Vue.prototype.$http.get('users/me');
         commit('SET_USER', response.data.data.data);
       } catch (error) {
+        console.log('Antes', Vue.$cookies.get('jwt'));
+
+        Vue.$cookies.remove('jwt', null, window.location.hostname.replace('www.', ''));
+        console.log('Despues', Vue.$cookies.get('jwt'));
+
         localStorage.removeItem('jwt');
         localStorage.removeItem('loggedIn');
         commit('LOGOUT');

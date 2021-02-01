@@ -75,6 +75,7 @@ export default {
     async logout({ commit }) {
       try {
         await Vue.prototype.$http.get('auth/logout');
+        Vue.$cookies.remove('jwt', null, window.location.hostname.replace('www.', ''));
         localStorage.removeItem('jwt');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('activeEmployee');
@@ -116,6 +117,7 @@ export default {
         }
       } catch (error) {
         console.log(error.response);
+        Vue.$cookies.remove('jwt', null, window.location.hostname.replace('www.', ''));
         localStorage.removeItem('jwt');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('activeEmployee');
