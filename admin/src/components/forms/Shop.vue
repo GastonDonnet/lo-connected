@@ -226,10 +226,10 @@ export default {
       return {
         cityId: [(v) => !!v || `Por favor elige una ciudad.`],
         street: [
-          (v) => !!v || `Por favor escrive una direccion.`,
+          (v) => !!v || `Por favor escribe una direccion.`,
           (v) =>
             (v && v.length < 100) ||
-            'La direccion debe tener menos de 100 caracteres!',
+            'La dirección debe tener menos de 100 caracteres!',
         ],
         note: [
           (v) =>

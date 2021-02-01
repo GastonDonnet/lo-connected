@@ -57,7 +57,7 @@ exports.newShop = catchAsync(async (req, res, next) => {
       userId: req.user.id,
     });
 
-    // Agrega direccion al shop
+    // Agrega dirección al shop
     addressData.shopId = newShop.id;
     await Address.query(trx).insert(addressData);
 

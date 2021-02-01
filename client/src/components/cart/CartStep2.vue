@@ -39,7 +39,7 @@
               :items="currentUser.address"
               :rules="rules.address"
               item-text="street"
-              label="Direccion de envio"
+              label="Dirección de envio"
               outlined
               return-object
             ></v-select>
@@ -209,7 +209,7 @@ export default {
         address: [
           (v) =>
             (this.order.delivery && !!v) ||
-            'Debe elegir la direccion a la cual se llevara el pedido!',
+            'Debe elegir la dirección a la cual se llevara el pedido!',
         ],
       };
     },

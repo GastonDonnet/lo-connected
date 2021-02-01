@@ -134,7 +134,7 @@ export default {
   data() {
     return {
       openTimeOptions: {
-        title: 'Horarios de atencion al publico',
+        title: 'Horarios de atención al publico',
       },
       deliveryTimeOptions: {
         title: 'Horario de delivery',

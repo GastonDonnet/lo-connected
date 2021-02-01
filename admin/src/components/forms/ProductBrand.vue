@@ -43,7 +43,7 @@ export default {
       description: [
         (v) =>
           v.length < 1000 ||
-          'La descripcion debe tener menos de 1000 caracteres!',
+          'La descripción debe tener menos de 1000 caracteres!',
       ],
     },
     productBrandLabel: {

@@ -91,7 +91,7 @@ exports.logout = (req, res) => {
 };
 
 exports.signupWithPassword = catchAsync(async (req, res, next) => {
-  // TODO: Email de confirmacion de cuenta
+  // TODO: Email de confirmación de cuenta
 
   // 1) Password Validation
   if (req.body.password !== req.body.passwordConfirm) {
@@ -106,7 +106,7 @@ exports.signupWithPassword = catchAsync(async (req, res, next) => {
     birthDate: req.body.birthDate,
     gender: req.body.gender,
 
-    // TODO: Pedir Telefono y Direccion en paso posterior para no abrumar a usuario
+    // TODO: Pedir Telefono y Dirección en paso posterior para no abrumar a usuario
   });
 
   const token = createSendToken(newUser, res);

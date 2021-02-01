@@ -16,18 +16,18 @@ export default {
       },
       {
         id: 2,
-        name: 'En Preparacion',
-        description: 'Order aceptada, en preparacion',
+        name: 'En Preparación',
+        description: 'Order aceptada, en preparación',
       },
       {
         id: 3,
-        name: 'Esperando Envio',
-        description: 'Order ya preparada, esperando asignacion de envio',
+        name: 'Esperando Envió',
+        description: 'Order ya preparada, esperando asignación de envió',
       },
       {
         id: 4,
-        name: 'En Envio',
-        description: 'Orden asignada a envio, en camino al cliente',
+        name: 'En Envió',
+        description: 'Orden asignada a envió, en camino al cliente',
       },
       {
         id: 5,
@@ -80,7 +80,7 @@ export default {
       },
       {
         id: 2,
-        name: 'En Preparacion',
+        name: 'En Preparación',
         description: 'Producto siendo preparado',
       },
       {
@@ -130,11 +130,11 @@ export default {
       orderData.shopId = rootState.shop.currentShop.id;
       commit('UPDATE_NEW_ORDER', orderData);
     },
-    async createOrder({ commit, state, rootState }, ) {
+    async createOrder({ commit, state, rootState }) {
       try {
         commit('UPDATE_NEW_ORDER', { cart: rootState.cart.cart });
         const response = await Vue.prototype.$http.post('order/', state.newOrder);
-        commit('cart/DELETE_CART',null,{ root: true });
+        commit('cart/DELETE_CART', null, { root: true });
         return response.data.data;
       } catch (error) {
         console.log(error.response);

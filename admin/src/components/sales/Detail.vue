@@ -201,7 +201,7 @@ export default {
         {
           id: 3,
           name: 'Esperando Envio',
-          description: 'Order ya preparada, esperando asignacion de envio',
+          description: 'Order ya preparada, esperando asignación de envio',
         },
         {
           id: 4,

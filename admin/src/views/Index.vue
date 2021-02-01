@@ -41,7 +41,7 @@
       <v-card :loading="invitationCode.loading">
         <v-card-title>Codigo de invitacion</v-card-title>
         <v-card-subtitle
-          >Pega el codigo de invitacion que obtuviste.
+          >Pega el codigo de invitación que obtuviste.
         </v-card-subtitle>
         <v-card-text>
           <v-text-field outlined v-model="invitationCode.code"></v-text-field>

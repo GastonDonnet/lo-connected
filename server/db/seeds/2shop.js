@@ -29,7 +29,7 @@ exports.seed = async (knex) => {
       },
       {
         id: 6,
-        name: 'Electronica',
+        name: 'Electrónica',
         icon: 'mdi-television-classic',
       },
     ]);

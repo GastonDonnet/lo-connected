@@ -64,7 +64,7 @@ exports.seed = async (knex) => {
       {
         id: 1,
         shopId: 1,
-        name: 'Generico',
+        name: 'Genérico',
       },
       {
         id: 2,
@@ -74,7 +74,7 @@ exports.seed = async (knex) => {
       {
         id: 3,
         shopId: 1,
-        name: 'Panificacion x peso',
+        name: 'Panificación x peso',
       },
     ]);
 

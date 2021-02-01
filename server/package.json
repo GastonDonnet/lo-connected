@@ -1,7 +1,7 @@
 {
   "name": "server-loconnected",
   "version": "1.0.0",
-  "description": "Proyecto inicializado con Node + MySQL with Objection and Knex. Cuentas de usuarios y autentificacion realizada.",
+  "description": "Proyecto inicializado con Node + MySQL with Objection and Knex. Cuentas de usuarios y autentificación realizada.",
   "main": "server.js",
   "scripts": {
     "start": "SET NODE_ENV=production&node ./server.js",

@@ -256,7 +256,7 @@ export default {
       brandId: 'Marca (opcional)',
       saleCategoryId: 'Descuento de categoria (opcional)',
       name: 'Nombre',
-      description: 'Descripcion (opcional)',
+      description: 'Descripción (opcional)',
       model: 'Modelo (opcional)',
       barcode: 'Codigo de barras (opcional)',
       price: 'Precio',

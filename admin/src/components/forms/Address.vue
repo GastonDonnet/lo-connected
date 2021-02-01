@@ -22,10 +22,10 @@ export default {
     },
     addressRules: {
       street: [
-        (v) => !!v || `Por favor escrive una direccion.`,
+        (v) => !!v || `Por favor escribe una dirección.`,
         (v) =>
           (v && v.length < 100) ||
-          'La direccion debe tener menos de 100 caracteres!',
+          'La dirección debe tener menos de 100 caracteres!',
       ],
       note: [
         (v) => v.length < 200 || 'La nota debe tener menos de 200 caracteres!',
@@ -51,7 +51,7 @@ export default {
       try {
         await this.$http.post('location/address', this.address);
         await this.getUser();
-        this.$toast.success('Direccion agregada correctamente!');
+        this.$toast.success('Direcciónagregada correctamente!');
         this.$emit('addressAdded');
       } catch (error) {
         console.log(error.response);

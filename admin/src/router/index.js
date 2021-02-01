@@ -100,7 +100,7 @@ const router = new VueRouter({
   routes,
 });
 
-// Proteccion Login
+// Protección Login
 const unprotectedRoutes = ['Login', 'Register'];
 router.beforeEach(async (to, from, next) => {
   // Si esta logueado, que pida el usuario
@@ -124,7 +124,7 @@ router.beforeEach(async (to, from, next) => {
   }
 });
 
-//Proteccion Permisos
+//Protección Permisos
 const hasPermission = async (permission) => {
   return (
     (store.getters['auth/permissions'].includes(permission) ||
