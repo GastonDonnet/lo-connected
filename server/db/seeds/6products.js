@@ -55,7 +55,7 @@ exports.seed = async (knex) => {
         shopId: 1,
         categoryId: null,
         saleId: null,
-        name: 'Panificacion',
+        name: 'Panificación',
       },
     ]);
 
@@ -83,14 +83,14 @@ exports.seed = async (knex) => {
       {
         id: 1,
         shopId: 1,
-        categoryId: 3,
+        categoryId: 1,
         saleId: null,
         brandId: null,
-        name: 'Dentifrico',
+        name: 'Dentífrico Oral B',
         description: null,
         barcode: null,
         model: null,
-        price: 140.52,
+        price: 150.24,
         hasAtributes: false,
       },
       {
@@ -110,7 +110,7 @@ exports.seed = async (knex) => {
       {
         id: 3,
         shopId: 1,
-        categoryId: 3,
+        categoryId: 4,
         masterProductId: 3,
         saleId: null,
         brandId: null,
@@ -121,6 +121,19 @@ exports.seed = async (knex) => {
         price: 50,
         hasAtributes: true,
       },
+      {
+        id: 4,
+        shopId: 1,
+        categoryId: 1,
+        saleId: null,
+        brandId: null,
+        name: 'Dentífrico Colgate',
+        description: null,
+        barcode: null,
+        model: null,
+        price: 140.52,
+        hasAtributes: false,
+      },
     ]);
 
     await knex('productReview').del();
@@ -130,7 +143,7 @@ exports.seed = async (knex) => {
         userId: 1,
         productId: 1,
         rating: 4.2,
-        comment: 'Muy buen dentifrico',
+        comment: 'Muy buen dentífrico',
       },
     ]);
 

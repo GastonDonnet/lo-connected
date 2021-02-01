@@ -38,7 +38,7 @@ exports.seed = async (knex) => {
         statusId: 2,
         orderId: 1,
         token: 'asosoapioah0wt9hapwohasio5125prhasiorhsa',
-        name: 'Dentifrico',
+        name: 'Dentífrico',
         price: 500.25,
         quantity: 2,
         subtotal: 1000.5,

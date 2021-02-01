@@ -26,7 +26,7 @@ exports.seed = async (knex) => {
       {
         id: 4,
         name: 'Gramos',
-        description: 'Gramos de panificacion',
+        description: 'Gramos de panificación',
         type: 'string',
         masterProductId: 3,
       },

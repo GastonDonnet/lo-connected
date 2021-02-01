@@ -75,7 +75,7 @@ exports.seed = async (knex) => {
         id: 1,
         shopId: 1,
         userId: 1,
-        comment: 'Muy buena atencion!',
+        comment: 'Muy buena atención!',
         rating: 4.2,
       },
     ]);
