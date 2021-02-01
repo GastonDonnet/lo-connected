@@ -38,6 +38,9 @@ Cuenta de prueba:
 
 - **server**
   - Implementar la creación y actualización de productos con atributos.
+  - Arreglar bug de auth Google:
+    - Cuando se entra por primera vez a una cuenta de google o luego de borrar cookies del mismo, hace una redirection a un sitio propio que hace que se borren las cookies del dominio actual de la pagina, perdiendo la cookie de redirection. Solucione de forma provisional el redirigirlo a la URL del cliente, si se loguea desde el Administrador no lo redirigirá.
+
 
 - **admin**
   - Implementar la creación, visualización y actualización de productos con atributos.

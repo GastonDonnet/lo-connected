@@ -35,7 +35,8 @@ const createSendToken = (user, res) => {
 exports.signinWithOAUTH = catchAsync(async (req, res, next) => {
   createSendToken(req.user, req, res);
 
-  const { redirectTo } = req.cookies;
+  let { redirectTo } = req.cookies;
+  if (!redirectTo) redirectTo = process.env.CLIENT_URL;
   res.clearCookie('redirectTo');
   res.redirect(redirectTo);
 });
