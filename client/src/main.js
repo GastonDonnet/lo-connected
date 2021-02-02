@@ -16,10 +16,6 @@ Vue.prototype.$staticUrl = apiUrl;
 Vue.prototype.$apiUrl = `${apiUrl}api/v1/`;
 
 const getJwt = () => {
-  console.log('gettingJwt');
-  console.log('cookies', Vue.$cookies.get('jwt')?.slice(0, 5));
-  console.log('local', localStorage.getItem('jwt')?.slice(0, 5));
-
   return Vue.$cookies.get('jwt') ?? localStorage.getItem('jwt');
 };
 
@@ -28,11 +24,13 @@ Vue.prototype.$http = axios.create({
   baseURL: Vue.prototype.$apiUrl,
 });
 
-Vue.prototype.$http.interceptors.request.use(function (config) {
+Vue.prototype.$http.interceptors.request.use(function (req) {
   const token = getJwt();
-  config.headers.Authorization = `Bearer ${token}`;
+  req.headers.Authorization = `Bearer ${token}`;
 
-  return config;
+  console.log(`${req.method} ${req.url}`);
+
+  return req;
 });
 
 new Vue({
