@@ -58,6 +58,14 @@
         </v-form>
       </v-col>
     </v-row>
+    <hr />
+    <v-row align="center" justify="center">
+      <v-col>
+        <p class="title text-center">
+          Vincula dos cuentas que posean el mismo email
+        </p>
+      </v-col>
+    </v-row>
     <v-row align="center" justify="center">
       <v-col>
         <v-btn
@@ -65,16 +73,10 @@
           block
           color="#3b5998"
           class="white--text"
-          :href="apiUrl + 'auth/facebook'"
+          @click="sendLoginOAUTH('facebook')"
           >Vincular con Facebook</v-btn
         >
-        <v-btn
-          v-else
-          block
-          color="#3b5998"
-          class="white--text"
-          :href="apiUrl + 'auth/facebook'"
-          disabled
+        <v-btn v-else block color="#3b5998" class="white--text" disabled
           >Vinculado con Facebook</v-btn
         >
       </v-col>
@@ -84,16 +86,10 @@
           block
           color="#4285F4"
           class="white--text"
-          :href="apiUrl + 'auth/google'"
+          @click="sendLoginOAUTH('google')"
           >Vincular con Google</v-btn
         >
-        <v-btn
-          v-else
-          disabled
-          block
-          color="#4285F4"
-          class="white--text"
-          :href="apiUrl + 'auth/google'"
+        <v-btn v-else disabled block color="#4285F4" class="white--text"
           >Vinculado con Google</v-btn
         >
       </v-col>
@@ -166,8 +162,22 @@ export default {
     };
   },
   methods: {
+    ...mapActions('auth', ['getUser']),
     updateUser() {
       //TODO: IMPLEMENTAR
+    },
+    sendLoginOAUTH(provider) {
+      window.open(
+        `${this.apiUrl}auth/${provider}`,
+        'mywindow',
+        'location=1, status=1, scrollbars=1, width=800, height=800'
+      );
+
+      const vm = this;
+      let listener = window.addEventListener('message', async (jwt) => {
+        await this.getUser();
+        this.user = { ...this.currentUser };
+      });
     },
   },
 };

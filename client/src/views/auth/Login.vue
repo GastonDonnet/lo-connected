@@ -60,7 +60,7 @@
                     elevation="0"
                     color="#3b5998"
                     dark
-                    :href="apiUrl + 'auth/facebook'"
+                    @click="sendLoginOAUTH('facebook')"
                     ><v-icon left>mdi-facebook</v-icon>Ingresar con
                     Facebook</v-btn
                   >
@@ -72,7 +72,7 @@
                     elevation="0"
                     color="#4285F4"
                     dark
-                    :href="apiUrl + 'auth/google'"
+                    @click="sendLoginOAUTH('google')"
                     ><v-icon left>mdi-google</v-icon>Ingresar con Google
                   </v-btn>
                 </v-col>
@@ -172,6 +172,18 @@ export default {
     async sendLoginWithPassword() {
       await this.loginWithPassword(this.user);
       this.$router.push(this.loginRedirect);
+    },
+    sendLoginOAUTH(provider) {
+      window.open(
+        `${this.apiUrl}auth/${provider}`,
+        'mywindow',
+        'location=1, status=1, scrollbars=1, width=800, height=800'
+      );
+
+      const vm = this;
+      let listener = window.addEventListener('message', (jwt) => {
+        this.sendLogin();
+      });
     },
   },
 

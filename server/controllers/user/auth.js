@@ -33,12 +33,11 @@ const createSendToken = (user, res) => {
 };
 
 exports.signinWithOAUTH = catchAsync(async (req, res, next) => {
-  createSendToken(req.user, req, res);
+  const jwt = createSendToken(req.user, req, res);
 
-  let { redirectTo } = req.cookies;
-  if (!redirectTo) redirectTo = process.env.CLIENT_URL;
-  res.clearCookie('redirectTo');
-  res.redirect(redirectTo);
+  const responseHTML = `<html><head><title>Auth Succesful</title></head><body></body><script>jwt = "${jwt}" ; window.opener.postMessage(jwt, "*");window.close();</script></html>`;
+
+  res.status(200).send(responseHTML);
 });
 
 exports.signinWithPassword = catchAsync(async (req, res, next) => {
